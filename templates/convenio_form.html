@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+
+{% block title %}Formulário/Convênio{% endblock %}
+
+
+{% block main %}
+<!-- Início do conteúdo da página -->
+<div class="container-fluid">
+    <!-- Cabeçalho da página -->
+
+    <!-- Início do formulario -->
+    <form style="padding-top:9px" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Cadastro de Convênios:</h1>
+            </div>
+
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input do convênio -->
+                <div class="form-group col-md-4">
+                    {{ form.concedente|bootstrap }}
+                </div>
+                <!--CNPJ/MF-->
+                <div class="form-group col-md-4">
+                    {{ form.cnpj|bootstrap }}
+                </div>
+                <!-- Input da Razão  Social -->
+                <div class="form-group col-md-4">
+                    {{ form.razao_social|bootstrap }}
+                </div>
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input da Unidade Executora -->
+                <div class="form-group col-md-6">
+                    {{ form.unidade_executora|bootstrap }}
+                </div>
+                <!-- Input do Endereço -->
+                <div class="form-group col-md-6">
+                    {{ form.endereco|bootstrap }}
+                </div>
+            </div>
+            <div class="form-row">
+                <!--Telefone-->
+                <div class="form-group col-md-3">
+                    {{ form.telefone|bootstrap}}
+                </div>
+                <!--Email-->
+                <div class="form-group col-md-3">
+                    {{ form.email|bootstrap }}
+                </div>
+                <!--Representante Responsável-->
+                <div class="form-group col-md-5">
+                    {{ form.representante|bootstrap }}
+                </div>
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input do Distrito -->
+                <div class="form-group col-md-2">
+                    {{ form.tipo_de_estabelecimento|bootstrap }}
+                </div>
+
+                <div class="form-group date col-md-3" style="margin-top : 27px; left: 15px;" id="datepicker" data-provide="datepicker">
+                    {{ form.data|bootstrap }}
+                </div>
+                <div class="form-group col-md-3" type="text">
+                    {{ form.descricao|bootstrap }}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form.condicoes|bootstrap }}
+                </div>
+            </div>
+            <!-- Início linha de conteúdo -->
+            <!-- Botão -->
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+</div>
+<!-- Fim do formulario -->
+{% endblock %}

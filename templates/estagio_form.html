@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block title %}Formulário/Estágio{% endblock %}
+
+{% block main %}
+<!-- inicio do formulario -->
+<div class="container-fluid">
+
+    <form method="post" style="padding-top:9px" class="disciplinasDropdown"
+          data-disciplinasurl="{% url 'ajax_load_disciplinas' %}" novalidate>
+        {% csrf_token %}
+        <div class="container">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Cadastro de Estágios:</h1>
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input do convênio -->
+                <div class="form-group col-md-3">
+                    {{ form.tipo_de_convenio|bootstrap }}
+                </div>
+                <!-- Input da curso -->
+                <div class="form-group col-md-3">
+                    {{ form.curso|bootstrap }}
+                </div>
+                <!-- Input da disciplina -->
+                <div class="form-group col-md-4">
+                    {{ form.disciplina|bootstrap}}
+                </div>
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input do N° de alunos -->
+                <div class="form-group col-md-2">
+                    {{ form.turno|bootstrap }}
+                </div>
+                <div class="form-group col-md-2">
+                    {{ form.quantidade_de_alunos|bootstrap }}
+                </div>
+                <div class="form-group col-md-2">
+                    {{ form.custo_por_aluno|bootstrap }}
+                </div>
+                <!-- Input do Turno -->
+                <div class="form-group col-md-6">
+                    {{ form.preceptor|bootstrap }}
+                </div>
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input do Local -->
+                <div class="form-group col-md-12">
+                    {{ form.local|bootstrap }}
+                </div>
+
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <!-- Input do distrito -->
+                <div class="form-group col-md-6">
+                    {{ form.tipo_de_estabelecimento|bootstrap }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form.setor|bootstrap }}
+                </div>
+                <!-- Input do custo -->
+            </div>
+            <!-- Início linha de conteúdo -->
+            <div class="form-row">
+                <div class="form-group date col-md-6" id="datepicker" data-provide="datepicker">
+                    {{ form.dates|bootstrap }}
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Botão -->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+</div>
+</form>
+</div>
+<br>
+<!-- Fim do formulario -->
+{% endblock %}

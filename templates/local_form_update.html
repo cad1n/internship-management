@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}Atualizar{% endblock %}
+
+{% block main %}
+<section class="aw-layout-content  js-content">
+    <form method="POST" style="padding-top:70px">
+        {% csrf_token %}
+        <div class="container">
+            <h1>Alterar Informações:</h1>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.nome_local|bootstrap }}
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Alterar</button>
+            <a class="btn btn-primary" href="{% url 'listlocal' %}">Voltar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

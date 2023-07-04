@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %} DELETAR? {% endblock %}
+
+{% block main %}
+<section class="aw-layout-content  js-content">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+             <div class="form-row">
+            <h1>Deseja Deletar  {{object.disciplina}}?</h1>
+
+            </div>
+            <button class="btn btn-primary" type="submit">Deletar</button>
+            <a class="btn btn-primary" href="{% url 'estagiolista' %}">Cancelar</a>
+        </div>
+    </form>
+    {% endblock %}

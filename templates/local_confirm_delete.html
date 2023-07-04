@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block title %} DELETAR? {% endblock %}
+
+{% block main %}
+<section class="aw-layout-content  js-content">
+    <form method="POST" style="padding-top:70px" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <h1>Deseja Deletar {{local.nome}}?</h1>
+            <div class="form-row">
+            </div>
+            <button class="btn btn-primary" type="submit">Deletar</button>
+            <a class="btn btn-primary" href="{% url 'listlocal' %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
