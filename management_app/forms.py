@@ -2,6 +2,8 @@ from django.forms import ModelForm
 from .models import Convenio, Estagio, Curso, Disciplina, Preceptor, Local, Estabelecimento
 from bootstrap_datepicker_plus.widgets import DatePickerInput
 
+tipoDeEstabelecimento = str('Tipo de Estabelecimento')
+
 
 class ConvenioForm(ModelForm):
     class Meta:
@@ -17,7 +19,7 @@ class ConvenioForm(ModelForm):
         self.fields['razao_social'].widget.attrs['placeholder'] = 'Razão Social'
         self.fields['unidade_executora'].widget.attrs['placeholder'] = 'Unidade Executora'
         self.fields['endereco'].widget.attrs['placeholder'] = 'Endereço'
-        self.fields['tipo_de_estabelecimento'].widget.attrs['placeholder'] = 'Tipo de Estabelecimento'
+        self.fields['tipo_de_estabelecimento'].widget.attrs['placeholder'] = tipoDeEstabelecimento
         self.fields['cnpj'].widget.attrs['placeholder'] = 'CNPJ'
         self.fields['representante'].widget.attrs['placeholder'] = 'Representante'
         self.fields['concedente'].widget.attrs['placeholder'] = 'Concedente'
@@ -44,7 +46,7 @@ class EstagioForm(ModelForm):
         self.fields['custo_por_aluno'].widget.attrs['placeholder'] = 'Custo por Aluno'
         self.fields['tipo_de_convenio'].widget.attrs['placeholder'] = 'Convênio'
         self.fields['local'].widget.attrs['placeholder'] = 'Local'
-        self.fields['tipo_de_estabelecimento'].widget.attrs['placeholder'] = 'Tipo de Estabelecimento'
+        self.fields['tipo_de_estabelecimento'].widget.attrs['placeholder'] = tipoDeEstabelecimento
         self.fields['setor'].widget.attrs['placeholder'] = 'Setor'
 
 
@@ -96,4 +98,4 @@ class EstabelecimentoForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EstabelecimentoForm, self).__init__(*args, **kwargs)
-        self.fields['tipo'].widget.attrs['placeholder'] = 'Tipo de Estabelecimento'
+        self.fields['tipo'].widget.attrs['placeholder'] = tipoDeEstabelecimento
