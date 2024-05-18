@@ -59,6 +59,7 @@ class Disciplina(models.Model):
     id_disciplina = models.AutoField(primary_key=True)
     nome_disciplina = models.CharField(max_length=40, null=False, blank=False, unique=True,
                                        validators=[lettervalidator])
+    curso = models.ForeignKey(Curso, on_delete=models.PROTECT, default=None)
 
     def __str__(self):
         return self.nome_disciplina

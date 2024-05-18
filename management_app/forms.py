@@ -63,7 +63,7 @@ class CursoForm(ModelForm):
 class DisciplinaForm(ModelForm):
     class Meta:
         model = Disciplina
-        fields = ['nome_disciplina']
+        fields = ['nome_disciplina', 'curso']
 
     def __init__(self, *args, **kwargs):
         super(DisciplinaForm, self).__init__(*args, **kwargs)
@@ -73,7 +73,7 @@ class DisciplinaForm(ModelForm):
 class PreceptorForm(ModelForm):
     class Meta:
         model = Preceptor
-        fields = ['nome_preceptor', 'matricula', 'curso', 'disciplina']
+        fields = ['nome_preceptor', 'matricula', 'disciplina', 'curso']
 
     def __init__(self, *args, **kwargs):
         super(PreceptorForm, self).__init__(*args, **kwargs)

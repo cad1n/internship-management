@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %} Relatório/Cursos {% endblock %}
+{% csrf_token %}
+{% block main %}
+<div class="container-fluid">
+    <!-- Cabeçalho da página -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="form-group col-md-4">
+            <h1 class="h3 mb-0 text-gray-800">Relatório dos Cursos:</h1>
+        </div>
+
+
+        <div class="input-group" style="flex-direction: row-reverse">
+            <div class="input-group-append">
+                <button class="btn btn-primary" style="border-radius: 0px 5px 5px 0px;" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+            <input type="text" class="form-control bg-light border-1 small col-4"
+                   style="border-radius: 5px 0px 0px 5px;" placeholder="Procurar por..." aria-label="Search"
+                   aria-describedby="basic-addon2">
+        </div>
+    </div>
+    <br>
+    <!-- Tabela -->
+    <div class="form-group col-md-12">
+        <table class="table table-striped">
+            <thead class="thead-btn btn-primary">
+            <tr>
+                <th scope="col">Curso</th>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Turno</th>
+                <th scope="col">Preceptor</th>
+                <th scope="col">RGM do Preceptor</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for preceptor in object_list %}
+            <tr>
+                <td>{{ preceptor.curso }}</td>
+                <td>{{ preceptor.disciplina.nome }}</td>
+                <td>{{ preceptor.disciplina.turno }}</td>
+                <td>{{ preceptor.nome }}</td>
+                <td>{{ preceptor.matricula }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="{% url 'pdfcurso' %}" target="_blank">Gerar PDF</a>
+    </div>
+</div>
+{% endblock %}
+<!-- Fim da Tabela -->

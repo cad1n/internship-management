@@ -5,7 +5,7 @@ from .views import ConvenioList, ConvenioCreate, ConvenioUpdate, ConvenioDelete,
     EstagioCreate, EstagioLista, EstagioDelete, EstagioUpdate, dash_board, \
     ConvenioDetail, EstagioDetail, CursoLista, CursoCreate, CursoUpdate, CursoDelete, CursoDetail, \
     DisciplinaCreate, DisciplinaList, DisciplinaUpdate, DisciplinaDelete, DisciplinaDetail, PreceptorCreate, \
-    PreceptorList, PreceptorUpdate, PreceptorDelete, PreceptorDetail, LocalCreate, LocalList, LocalUpdate, LocalDelete,\
+    PreceptorList, PreceptorUpdate, PreceptorDelete, PreceptorDetail, LocalCreate, LocalList, LocalUpdate, LocalDelete, \
     EstabelecimentoCreate, EstabelecimentoList, EstabelecimentoUpdate, EstabelecimentoDelete, EstagioRel, CursoRel, \
     ConvenioRel, PdfCurso, PdfConvenio, PdfEstagio
 
@@ -52,6 +52,7 @@ urlpatterns = [
     path('deleteestabelecimento/<int:pk>/', EstabelecimentoDelete.as_view(), name='deleteestabelecimento'),
 
     path('ajax/load-disciplinas/', views.load_disciplinas, name='ajax_load_disciplinas'),
+    path('ajax/load-preceptores/', views.load_preceptores, name='ajax_load_preceptores'),
     path('pdfcurso/', PdfCurso.as_view(), name='pdfcurso'),
     path('pdfconvenio/', PdfConvenio.as_view(), name='pdfconvenio'),
     path('pdfestagio/', PdfEstagio.as_view(), name='pdfestagio'),

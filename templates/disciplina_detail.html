@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block title %} Listagem/Convênios {% endblock %}
+
+{% csrf_token %}
+
+{% block main %}
+<!-- Início do conteúdo da página -->
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="form-group col-md-4">
+            <h1 class="h3 mb-0 text-gray-800">Informações da Disciplina {{Disciplina.Nome}}:</h1>
+        </div>
+
+
+        <div class="input-group" style="flex-direction: row-reverse">
+
+            <div class="input-group-append">
+                <button class="btn btn-primary" style="border-radius: 0px 5px 5px 0px;" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+            <input type="text" class="form-control bg-light border-1 small col-4"
+                   style="border-radius: 5px 0px 0px 5px;" placeholder="Procurar por..." aria-label="Search"
+                   aria-describedby="basic-addon2">
+        </div>
+    </div>
+    <!-- Tabela -->
+    <table class="table table-striped">
+        <thead class="thead-btn btn-primary">
+        <tr>
+        <th scope="col">Nome da Disciplina</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td>{{ disciplina.nome_disciplina }}</td>>
+            <td><a class="fas fa-trash" href="{% url 'disciplinadelete' disciplina.id %}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'disciplinaupdate' disciplina.id %}">Alterar Informações</a>
+    <a class="btn btn-primary" href="{% url 'disciplinalista'%}">Voltar</a>
+</div>
+
+<!-- Fim da Tabela -->
+{% endblock %}

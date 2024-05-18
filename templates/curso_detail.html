@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block title %} Listagem/Curso {% endblock %}
+
+{% csrf_token %}
+
+{% block main %}
+<!-- Início do conteúdo da página -->
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="form-group col-md-4">
+            <h1 class="h3 mb-0 text-gray-800">Informações do Curso: </h1>
+        </div>
+    </div>
+    <!-- Tabela -->
+    <table class="table table-striped">
+        <thead class="thead-btn btn-primary">
+        <tr>
+            <th scope="col">Nome do Curso</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td>{{ curso.nome }}</td>
+            <td><a class="fas fa-trash" href="{% url 'cursodelete' curso.id_curso %}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'cursoupdate' curso.id_curso %}">Alterar Informações</a>
+    <a class="btn btn-primary" href="{% url 'cursolista'%}">Voltar</a>
+</div>
+
+<!-- Fim da Tabela -->
+{% endblock %}

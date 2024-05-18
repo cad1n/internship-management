@@ -1,0 +1,246 @@
+{% load static %}
+{% load bootstrap %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- fontes para este template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- styles para este template -->
+    <link href="{% static 'css/site.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/Relatório.css' %}" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.standalone.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.standalone.min.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <title>Dashboard</title>
+</head>
+
+<body id="page-top">
+<!-- Wrapper de Página -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard' %}">
+            <div class="sidebar-brand-icon">
+                <img src="https://novoportal.cruzeirodosul.edu.br/static/logos/67/logo-negativo_67.svg"
+                     alt="Unipê"
+                     class="img-responsive logoUnipe" style="width:150px;">
+            </div>
+        </a>
+        <!-- Divisor -->
+        <hr class="sidebar-divider my-0">
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'dashboard' %} ">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+        <!-- Divisor -->
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Menu Recolher Utilitários -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+               aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-bookmark"></i>
+                <span>Curso</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url 'cursocreate' %}">Criar Curso</a>
+                    <a class="collapse-item" href="{% url 'createdisciplina' %}">Criar Disciplina</a>
+                    <a class="collapse-item" href="{% url 'createpreceptor' %}"> Criar Preceptor</a>
+                    <a class="collapse-item" href="{% url 'cursolista' %}">Lista de Cursos</a>
+                    <a class="collapse-item" href="{% url 'disciplinalista' %}">Lista de Disciplinas</a>
+                    <a class="collapse-item" href="{% url 'preceptorlista' %}">Lista de Preceptores</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Menu de recolhimento de páginas -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-hospital-alt"></i>
+                <span>Convênio</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url 'createlocal' %}">Cadastrar Local</a>
+                    <a class="collapse-item" href="{% url 'createestabelecimento' %}">Cadastrar Estabelecimento</a>
+                    <a class="collapse-item" href="{% url 'conveniocreate' %}">Cadastrar Convênio</a>
+                    <a class="collapse-item" href="{% url 'listlocal' %}">Lista de Locais</a>
+                    <a class="collapse-item" href="{% url 'listestabelecimento' %}">Lista de Estabelecimentos</a>
+                    <a class="collapse-item" href="{% url 'conveniolista' %}">Lista de Convênios</a>
+                    <div class="collapse-divider"></div>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Menu de recolhimento de páginas -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Estágio</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url 'estagiocreate' %}">Cadastro</a>
+                    <a class="collapse-item" href="{% url 'estagiolista' %}">Listagem</a>
+                </div>
+            </div>
+        </li>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+
+        </div>
+        <!-- Nav Item - Menu de recolhimento de páginas -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+               aria-expanded="true" aria-controls="collapseThree">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Relatório</span>
+            </a>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url 'cursorel' %}">Curso</a>
+                    <a class="collapse-item" href="{% url 'conveniorel' %}">Convênio</a>
+                    <a class="collapse-item" href="{% url 'estagiorel' %}">Estágio</a>
+                </div>
+            </div>
+
+        </li>
+
+
+        <!-- Divisor -->
+        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+    </ul>
+    <!-- Fim da Sidebar -->
+    <!-- Wrapper de Conteúdo -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Conteúdo principal -->
+        <div id="content">
+            <div id="cima">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                            <!-- Nav Item -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <!-- Dropdown -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a href="{% url 'logout' %}">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Sair
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Fim do Topbar -->
+            <!-- Início do conteúdo da página -->
+
+            {% block main %} {% endblock %}
+            <!--Fim da barra de navegação-->
+
+            <footer>
+                <!-- Bootstrap core JavaScript-->
+                <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+                <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+                <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+                <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+                <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+                <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+                <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+                <script src="{% static 'js/bootstrap-datepicker.pt-BR.js' %}"></script>
+                {{ form.media }}
+
+                <!--Script de dropdowns pedentes quando o relacionamento do banco for 1:1, utilize esse modelo junto nos forms.py -->
+                <script>
+                    $("#id_curso").change(function () {
+                        let url = $(".disciplinasDropdown").attr("data-disciplinasurl");
+                        let cursoId = $(this).val();
+                        $.ajax({
+                            type: 'GET',
+                            url: url,
+                            data: {
+                                'curso': cursoId
+                            },
+                            success: function (data) {
+                                $("#id_disciplina").html(data);
+                            }
+                        });
+                    });
+                </script>
+                <script>
+                    $("#id_disciplina").change(function () {
+                        let url = $(".disciplinasDropdown").attr("data-preceptoresurl");
+                        let disciplinaId = $(this).val();
+                        $.ajax({
+                            type: 'GET',
+                            url: url,
+                            data: {
+                                'disciplina': disciplinaId
+                            },
+                            success: function (data) {
+                                $("#id_preceptor").html(data);
+                            }
+                        });
+                    });
+                </script>
+                <!--Script do calendário-->
+                <script>
+                    $('#datepicker').datepicker({
+                        multidate: true,
+                        multidateSeparator: ",",
+                        format: 'yyyy-mm-dd',
+                        locale: 'pt-BR'
+                    });
+
+
+                </script>
+            </footer>
+            <!-- Fim do Footer -->
+        </div>
+    </div>
+    <!-- Wrapper de fim de página -->
+    <!-- Role para o botão superior-->
+    <a class="scroll-to-top rounded" href="#">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+</div>
+</body>
+</html>

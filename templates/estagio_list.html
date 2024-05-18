@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load multiply %}
+
+{% block title %} Listagem/Estágios {% endblock %}
+
+{% csrf_token %}
+
+{% block main %}
+<!-- Início do conteúdo da página -->
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="form-group col-md-4">
+            <h1 class="h3 mb-0 text-gray-800">Tabela dos Estágios:</h1>
+        </div>
+
+        <div class="form-group-append" style="flex-direction: row-reverse">
+            <form class="form-inline">
+                <div class="input-group-append">
+                    <input type="text" class="form-control"
+                           placeholder="Procurar por..." name="estagio"
+                           id="estagio">
+
+                    <button type="submit" class="btn btn-primary"><a class="fas fa-search fa-sm"></a></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <table class="table table-striped">
+        <thead class="thead-btn btn-primary">
+        <tr>
+            <th scope="col">Curso</th>
+            <th scope="col">Disciplina</th>
+            <th scope="col">Tipo de Convênio</th>
+            <th scope="col">Preceptor</th>
+            <th scope="col">Turno</th>
+            <th scope="col">Setor</th>
+            <th scope="col">Quantidade de Alunos</th>
+            <th scope="col">Quantidade de Dias do Estágio</th>
+            <th scope="col">Data Início</th>
+            <th scope="col">Data Término</th>
+            <th scope="col">Custo Diário do Estágio</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for estagio in object_list %}
+        <tr>
+            <td><a href="{% url 'estagiodetail' estagio.id %}">{{ estagio.curso }}</a></td>
+            <td>{{ estagio.disciplina }}</td>
+            <td>{{ estagio.tipo_de_convenio }}</td>
+            <td>{{ estagio.preceptor }}</td>
+            <td>{{ estagio.turno }}</td>
+            <td>{{ estagio.setor }}</td>
+            <td>{{ estagio.quantidade_de_alunos }}</td>
+            <td>{{ estagio.dates|length }}</td>
+            <td>{{ estagio.dates|first }}</td>
+            <td>{{ estagio.dates|last }}</td>
+            <td>{% multiply estagio.quantidade_de_alunos estagio.custo_por_aluno %}</td>
+            <td><a class="fas fa-trash" href="{% url 'estagiodelete' estagio.id %}"></a></td>
+
+        </tr>
+        {% endfor %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert {{ message.tags }} m-3" id="msg" role="alert"
+             data-dismiss="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <a href="{% url 'estagiocreate' %}">
+            <button type="submit" class="btn btn-primary">Cadastrar novo estágio</button>
+        </a>
+        </tbody>
+    </table>
+</div>
+<script>
+                    setTimeout(function(){
+                      if ($('#msg').length > 0) {
+                        $('#msg').remove();
+                      }
+                    }, 2000)
+
+
+
+</script>
+<!-- Fim da Tabela -->
+{% endblock %}

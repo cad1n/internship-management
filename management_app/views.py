@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
-from django.http import HttpResponseRedirect, request
+from django.http import HttpResponseRedirect, request, JsonResponse
 from django.shortcuts import render, redirect
 
 from .forms import ConvenioForm, EstagioForm, CursoForm, DisciplinaForm, PreceptorForm, LocalForm, EstabelecimentoForm
@@ -218,12 +218,6 @@ class DisciplinaDetail(LoginRequiredMixin, DetailView):
     template_name = 'disciplina_detail.html'
 
 
-def load_disciplinas(request):
-    curso_id = request.GET.get('curso')
-    disciplinas = Disciplina.objects.filter(curso_id=curso_id)
-    return render(request, 'disciplinas_dropdown_list.html', {'disciplinas': disciplinas})
-
-
 class PreceptorCreate(LoginRequiredMixin, CreateView):
     model = Preceptor
     form_class = PreceptorForm
@@ -252,16 +246,32 @@ class PreceptorUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('preceptorlista')
 
 
-class PreceptorDelete(LoginRequiredMixin, DeleteView):
+class PreceptorDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Preceptor
-    form_class = PreceptorForm
     template_name = 'preceptor_confirm_delete.html'
     success_url = reverse_lazy('preceptorlista')
+    success_message = "Preceptor deletado com sucesso!"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
 
 
 class PreceptorDetail(LoginRequiredMixin, DetailView):
     model = Preceptor
     template_name = 'preceptor_detail.html'
+
+
+def load_preceptores(request):
+    disciplina_id = request.GET.get('disciplina')
+    preceptores = Preceptor.objects.filter(disciplina_id=disciplina_id)
+    return render(request, 'preceptores_dropdown_list.html', {'preceptores': preceptores})
+
+
+def load_disciplinas(request):
+    curso_id = request.GET.get('curso')
+    disciplinas = Disciplina.objects.filter(curso_id=curso_id)
+    return render(request, 'disciplinas_dropdown_list.html', {'disciplinas': disciplinas})
 
 
 class LocalCreate(LoginRequiredMixin, CreateView):
