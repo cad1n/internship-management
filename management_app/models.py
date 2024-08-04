@@ -1,13 +1,14 @@
-from django.core.validators import MaxValueValidator, RegexValidator
+from django.core.validators import MaxValueValidator, RegexValidator, MinValueValidator
 from django.db import models
 from django.db.models.functions import Upper
 from management_app.utils import validate_cnpj
 from django.contrib.postgres.fields import ArrayField
+from django.utils.translation import gettext_lazy as _
 
 lettervalidator = RegexValidator('^[0-9a-zàãáâéêíóôúA-Z ç]*$',
                                  'Apenas letras são permitidas e/ou números positivos são permitidos')
 
-phonevalidator = RegexValidator('\(([0-9]{2})\)([0-9]{4,5})\-([0-9]{4})')
+phonevalidator = RegexValidator(r"\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}")
 
 TURNO_CHOICES = [
     ('Manhã', 'Manhã'),
@@ -168,36 +169,83 @@ class Convenio(models.Model):
 class Estagio(models.Model):
     id_estagio = models.AutoField(primary_key=True)
     curso = models.OneToOneField(
-        Curso, null=False, blank=False, unique=True, default=None, on_delete=models.CASCADE)
-    disciplina = models.OneToOneField(Disciplina, null=False, max_length=50, unique=True, blank=False,
-                                      on_delete=models.CASCADE)
-    preceptor = models.ForeignKey(Preceptor, null=False, max_length=30, blank=False,
-                                  on_delete=models.CASCADE)
-    tipo_de_convenio = models.OneToOneField(Convenio, default=None, unique=True, blank=False, on_delete=models.CASCADE,
-                                            verbose_name="Concedente")
+        'Curso',
+        null=False,
+        blank=False,
+        unique=True,
+        on_delete=models.CASCADE
+    )
+    disciplina = models.OneToOneField(
+        'Disciplina',
+        null=False,
+        blank=False,
+        unique=True,
+        on_delete=models.CASCADE
+    )
+    preceptor = models.ForeignKey(
+        'Preceptor',
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
+    tipo_de_convenio = models.OneToOneField(
+        'Convenio',
+        null=False,
+        blank=False,
+        unique=True,
+        on_delete=models.CASCADE,
+        verbose_name=_("Concedente")
+    )
     local = models.ForeignKey(
-        Local, null=False, blank=False, default=None, on_delete=models.CASCADE)
-    tipo_de_estabelecimento = models.ForeignKey(Estabelecimento, null=False, blank=False, default=None,
-                                                on_delete=models.CASCADE, verbose_name="Tipo de Estabelecimento")
-    setor = models.CharField(max_length=50, null=False,
-                             blank=False, default=None, validators=[lettervalidator])
+        'Local',
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
+    tipo_de_estabelecimento = models.ForeignKey(
+        'Estabelecimento',
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        verbose_name=_("Tipo de Estabelecimento")
+    )
+    setor = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+        validators=[lettervalidator]
+    )
     quantidade_de_alunos = models.IntegerField(
-        blank=False, null=False, default=None, verbose_name="Qtd de Alunos")
-    turno = models.CharField(choices=TURNO_CHOICES,
-                             null=False, blank=False, max_length=50)
+        blank=False,
+        null=False,
+        validators=[MinValueValidator(1)],
+        verbose_name=_("Qtd de Alunos")
+    )
+    turno = models.CharField(
+        choices=TURNO_CHOICES,
+        null=False,
+        blank=False,
+        max_length=50
+    )
     custo_por_aluno = models.DecimalField(
-        max_digits=256, decimal_places=2, null=False, blank=False, default=None)
-    dates = ArrayField(models.DateField(max_length=256), size=256, verbose_name='Data')
+        max_digits=10,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        validators=[MinValueValidator(0.00)]
+    )
+    dates = ArrayField(
+        models.DateField(),
+        size=256,
+        verbose_name=_('Data')
+    )
 
     def __str__(self):
         return self.tipo_de_convenio.razao_social
 
     class Meta:
-        verbose_name = "Estágio"
-        verbose_name_plural = "Estágios"
-        constraints = [
-            models.UniqueConstraint(Upper('setor'), name='unique_upper_setor_category'),
-        ]
+        verbose_name = _("Estágio")
+        verbose_name_plural = _("Estágios")
 
 
 class Relatorio(models.Model):
