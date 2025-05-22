@@ -9,9 +9,6 @@ class ConvenioForm(ModelForm):
         model = Convenio
         fields = ['concedente', 'endereco', 'unidade_executora', 'tipo_de_estabelecimento', 'representante',
                   'telefone', 'email', 'razao_social', 'cnpj', 'condicoes', 'descricao', 'data']
-        widgets = {
-            'data': DatePickerInput()
-        }
 
     def __init__(self, *args, **kwargs):
         super(ConvenioForm, self).__init__(*args, **kwargs)

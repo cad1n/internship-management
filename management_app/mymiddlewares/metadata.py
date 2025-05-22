@@ -7,7 +7,7 @@ class MetaData(object):
         return response
 
     @staticmethod
-    def process_view(request, view_func, view_args, view_kwargs):
+    def process_view(request):
         if request.user.is_authenticated:
             message = 'Seja bem-vindo(a), %s!' % request.user.username
         else:

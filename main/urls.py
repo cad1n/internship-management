@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path
 
 from main import settings
 # from management_app import urls as management_app_urls
