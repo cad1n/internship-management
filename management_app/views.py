@@ -350,6 +350,7 @@ def custo_diario():
     for i in Estagio.objects.all():
         a = len(i.dates)
         return custo_mensal() / a
+    return None
 
 
 def aluno():
@@ -359,6 +360,8 @@ def aluno():
         total += tot
         if custo_mensal() != 0:
             return custo_mensal() / total
+        return None
+    return None
 
 
 @login_required
