@@ -1,6 +1,5 @@
 from django.forms import ModelForm
 from .models import Convenio, Estagio, Curso, Disciplina, Preceptor, Local, Estabelecimento
-from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 tipoDeEstabelecimento = str('Tipo de Estabelecimento')
 
@@ -35,9 +34,6 @@ class EstagioForm(ModelForm):
         fields = ['curso', 'disciplina', 'preceptor', 'quantidade_de_alunos',
                   'custo_por_aluno', 'turno', 'tipo_de_convenio', 'local',
                   'tipo_de_estabelecimento', 'setor', 'dates']
-        widgets = {
-            'dates': DatePickerInput()
-        }
 
     def __init__(self, *args, **kwargs):
         super(EstagioForm, self).__init__(*args, **kwargs)

@@ -11,7 +11,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
-# Application definition
+SECRET_KEY = "522DF7D411BEFC55D6EB34633DECC"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,8 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap_datepicker_plus',
-    'bootstrapform',
     'management_app',
 
 ]
@@ -68,7 +66,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '5433',
+        'PORT': '5432',
     }
 }
 
