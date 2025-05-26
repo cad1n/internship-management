@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path
 from main import settings
 from django.contrib.auth import views as auth_views
 from management_app.views import redirect_to_angular
