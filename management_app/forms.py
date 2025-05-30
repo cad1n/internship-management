@@ -1,8 +1,6 @@
 from django.forms import ModelForm
 from .models import Convenio, Estagio, Curso, Disciplina, Preceptor, Local, Estabelecimento
 
-tipoDeEstabelecimento = str('Tipo de Estabelecimento')
-
 
 class ConvenioForm(ModelForm):
     class Meta:
